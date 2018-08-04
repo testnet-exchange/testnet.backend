@@ -47,7 +47,7 @@ const config = {
   },
   production: {
     ip: process.env.IP || undefined,
-    port: process.env.PORT || 8080,
+    port: process.env.PORT || 8030,
     mongo: {
       uri: process.env.MONGODB_URI || 'mongodb://localhost/testnet-xchange-backend'
     }
