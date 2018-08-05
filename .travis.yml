@@ -14,7 +14,7 @@ addons:
 script:
   - npm run connect-xchange
   - npm test -- -i --coverage
-deploy:
+after_success:
   skip_cleanup: true
   script:
     - ssh caffeinum@testnet.exchange "cd /home/caffeinum/testXback && git pull"
