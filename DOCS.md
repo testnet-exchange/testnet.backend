@@ -9,7 +9,9 @@
 	- [Authenticate with Google](#authenticate-with-google)
 	
 - [Trade](#trade)
-	- [Send request to Xchange](#send-request-to-xchange)
+	- [Send root-level request to Xchange](#send-root-level-request-to-xchange)
+	- [Send general-scope request to Xchange](#send-general-scope-request-to-xchange)
+	- [Send authenticated request to Xchange](#send-authenticated-request-to-xchange)
 	
 - [User](#user)
 	- [Create user](#create-user)
@@ -83,11 +85,40 @@
 
 # Trade
 
-## Send request to Xchange
+## Send root-level request to Xchange
 
 
 
-	GET /trade
+	GET /trade/admin/:method
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| access_token			| String			|  <p>admin access token.</p>							|
+| method			| String			|  <p>Xchange server method.</p>							|
+| ...			| Any			|  <p>parameters for a method (including uid if needed)</p>							|
+
+## Send general-scope request to Xchange
+
+
+
+	GET /trade/public/:method
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| method			| String			|  <p>Xchange server method.</p>							|
+| ...			| Any			|  <p>parameters for a method</p>							|
+
+## Send authenticated request to Xchange
+
+
+
+	GET /trade/user/:method
 
 
 ### Parameters
@@ -96,7 +127,7 @@
 |---------|-----------|--------------------------------------|
 | access_token			| String			|  <p>user access token.</p>							|
 | method			| String			|  <p>Xchange server method.</p>							|
-| params			| Array			|  <p>Array of parameters for a method.</p>							|
+| ...			| Any			|  <p>parameters for a method (without uid)</p>							|
 
 # User
 
