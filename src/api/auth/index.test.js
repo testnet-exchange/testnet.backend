@@ -66,11 +66,11 @@ test('POST /auth 401 (master) - wrong password', async () => {
   expect(status).toBe(401)
 })
 
-test('POST /auth 401 (master) - missing access_token', async () => {
+test('POST /auth 200 (user)', async () => {
   const { status } = await request(app())
     .post(apiRoot)
     .auth('a@a.com', '123456')
-  expect(status).toBe(401)
+  expect(status).toBe(201)
 })
 
 test('POST /auth 401 (master) - missing auth', async () => {
