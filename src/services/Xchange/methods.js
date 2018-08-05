@@ -1,7 +1,9 @@
 const check = {
   Number: a => Number.isNaN(Number(a)) ? false : Number(a),
   Optional: defaultValue => a => a || defaultValue,
-  ENUM: list => a => list.includes(a) ? a : false
+  ENUM: list => a => list.includes(a) ? a : false,
+  Taker_fee_rate: a => 0.0002,
+  Maker_fee_rate: a => 0.0001
 }
 
 export default [
@@ -21,6 +23,16 @@ export default [
     name: 'balance.history',
     role: 'user',
     tokens: ['uid', 'asset', 'business_type', 'start_time', 'end_time', 'offset', 'limit']
+  },
+  {
+    name: 'order.put_limit',
+    role: 'user',
+    tokens: ['uid', 'market', 'side', 'amount', 'price', 'taker_fee_rate', 'maker_fee_rate', 'source'],
+    handle: {
+      side: check.ENUM([1, 2]),
+      taker_fee_rate: check.Taker_fee_rate,
+      maker_fee_rate: check.Maker_fee_rate
+    }
   },
   // public scope
   {
