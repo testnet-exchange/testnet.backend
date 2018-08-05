@@ -48,5 +48,15 @@ export default [
       limit: check.Number,
       interval: check.Optional('0')
     }
+  },
+  {
+    name: 'market.status_today',
+    role: 'public',
+    tokens: ['market']
+  },
+  {
+    name: 'market.summary',
+    role: 'public',
+    tokens: ['market']
   }
 ]
