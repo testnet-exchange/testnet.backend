@@ -3,7 +3,7 @@ node_js:
 - v8
 - v10
 services:
-  - mongodb
+- mongodb
 addons:
   apt:
     sources:
@@ -12,13 +12,14 @@ addons:
     - gcc-4.8
     - g++-4.8
 script:
-  - echo "testnet.exchange,104.196.1.222 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBH5YNl+kx9CPNqCPmHfjWWea/wihgMJP8E6Bp3HrNnl0it+O916PHCJ+Dk8j2TadaleuT7NxA3BDXIo1qKUq/ys=" >> ~/.ssh/known_hosts
-  - npm run connect-xchange
-  - npm test -- -i --coverage
+- echo "testnet.exchange,104.196.1.222 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBH5YNl+kx9CPNqCPmHfjWWea/wihgMJP8E6Bp3HrNnl0it+O916PHCJ+Dk8j2TadaleuT7NxA3BDXIo1qKUq/ys="
+  >> ~/.ssh/known_hosts
+- npm run connect-xchange
+- npm test -- -i --coverage
 after_success:
   skip_cleanup: true
   script:
-    - ssh caffeinum@testnet.exchange "cd /home/caffeinum/testXback && git pull"
+  - ssh caffeinum@testnet.exchange "cd /home/caffeinum/testXback && git pull"
   on:
     branch: master
 env:
@@ -26,3 +27,6 @@ env:
   - CXX=g++-4.8
   - MASTER_KEY=masterKey
   - JWT_SECRET=jwtSecret
+before_install:
+- openssl aes-256-cbc -K $encrypted_1dbd2aab2682_key -iv $encrypted_1dbd2aab2682_iv
+  -in travis.enc -out travis -d
