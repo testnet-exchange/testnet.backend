@@ -36,6 +36,11 @@ const userSchema = new Schema({
     enum: roles,
     default: 'user'
   },
+  xid: {
+    type: Number,
+    unique: true,
+    default: 0
+  },
   picture: {
     type: String,
     trim: true
@@ -67,6 +72,19 @@ userSchema.pre('save', function (next) {
     this.password = hash
     next()
   }).catch(next)
+})
+
+userSchema.pre('save', function (next) {
+  const User = model
+
+  if (this.isNew) {
+    User.countDocuments().then(res => {
+      this.xid = res + 1 // start from one
+      next()
+    })
+  } else {
+    next()
+  }
 })
 
 userSchema.methods = {

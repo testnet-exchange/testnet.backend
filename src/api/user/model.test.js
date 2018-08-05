@@ -1,7 +1,7 @@
 import crypto from 'crypto'
 import { User } from '.'
 
-let user
+let user, newUser, newerUser
 
 beforeEach(async () => {
   user = await User.create({ name: 'user', email: 'a@a.com', password: '123456' })
@@ -29,6 +29,22 @@ describe('set email', () => {
     user.picture = 'not_gravatar.jpg'
     user.email = 'c@c.com'
     expect(user.picture).toBe('not_gravatar.jpg')
+  })
+})
+
+describe('autoincrement', () => {
+  beforeEach(async () => {
+    newUser = await User.create({ name: 'user2', email: 'b@a.com', password: '123456' })
+    newerUser = await User.create({ name: 'user3', email: 'c@a.com', password: '123456' })
+  })
+
+  it('assigns unique non-zero xid', () => {
+    expect(newUser.xid).not.toBe(0)
+    expect(newUser.xid).not.toBe(1)
+  })
+
+  it('assigns unique non-zero xid to second user', () => {
+    expect(newerUser.xid).not.toBe(newUser.xid)
   })
 })
 
