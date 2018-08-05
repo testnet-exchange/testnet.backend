@@ -9,22 +9,64 @@ export default [
   {
     name: 'balance.update',
     role: 'admin',
-    tokens: ['uid', 'asset', 'business_type', 'business_id', 'change_str', 'detail']
+    tokens: ['uid', 'asset', 'business_type', 'business_id', 'change_str', 'detail'],
+    handle: {
+      uid: check.Number,
+      business_id: check.Number
+    }
   },
   // user scope
   {
     name: 'balance.query',
     role: 'user',
-    tokens: ['uid']
+    tokens: ['uid'],
+    handle: {
+      uid: check.Number
+    }
   },
   {
     name: 'balance.history',
     role: 'user',
-    tokens: ['uid', 'asset', 'business_type', 'start_time', 'end_time', 'offset', 'limit']
+    tokens: ['uid', 'asset', 'business_type', 'start_time', 'end_time', 'offset', 'limit'],
+    handle: {
+      uid: check.Number,
+      start_time: check.Number,
+      end_time: check.Number,
+      offset: check.Number,
+      limit: check.Number
+    }
+  },
+  {
+    name: 'order.put_limit',
+    role: 'user',
+    tokens: ['uid', 'market', 'side', 'amount', 'price', 'taker_fee_rate', 'maker_fee_rate', 'source'],
+    handle: {
+      uid: check.Number,
+      side: check.ENUM([1, 2])
+    },
+    predefined: {
+      taker_fee_rate: 0.0002,
+      maker_fee_rate: 0.0001
+    }
+  },
+  {
+    name: 'order.pending',
+    role: 'user',
+    tokens: ['uid', 'market', 'offset', 'limit'],
+    handle: {
+      uid: check.Number,
+      offset: check.Number,
+      limit: check.Number
+    }
   },
   // public scope
   {
     name: 'asset.list',
+    role: 'public',
+    tokens: []
+  },
+  {
+    name: 'asset.summary',
     role: 'public',
     tokens: []
   },
@@ -36,5 +78,29 @@ export default [
       limit: check.Number,
       interval: check.Optional('0')
     }
+  },
+  {
+    name: 'market.last',
+    role: 'public',
+    tokens: ['market']
+  },
+  {
+    name: 'market.deals',
+    role: 'public',
+    tokens: ['market', 'limit', 'last_id'],
+    handle: {
+      limit: check.Number,
+      last_id: check.Number
+    }
+  },
+  {
+    name: 'market.status_today',
+    role: 'public',
+    tokens: ['market']
+  },
+  {
+    name: 'market.summary',
+    role: 'public',
+    tokens: ['market']
   }
 ]
