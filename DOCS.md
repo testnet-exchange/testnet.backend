@@ -8,6 +8,9 @@
 	- [Authenticate with Github](#authenticate-with-github)
 	- [Authenticate with Google](#authenticate-with-google)
 	
+- [Trade](#trade)
+	- [Send request to Xchange](#send-request-to-xchange)
+	
 - [User](#user)
 	- [Create user](#create-user)
 	- [Delete user](#delete-user)
@@ -77,6 +80,23 @@
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
 | access_token			| String			|  <p>Google user accessToken.</p>							|
+
+# Trade
+
+## Send request to Xchange
+
+
+
+	GET /trade
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| access_token			| String			|  <p>user access token.</p>							|
+| method			| String			|  <p>Xchange server method.</p>							|
+| params			| Array			|  <p>Array of parameters for a method.</p>							|
 
 # User
 

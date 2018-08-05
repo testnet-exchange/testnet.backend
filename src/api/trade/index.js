@@ -10,9 +10,12 @@ const router = new Router()
  * @apiGroup Trade
  * @apiPermission user
  * @apiParam {String} access_token user access token.
- * @apiSuccess {Object} trade Response.
- * @apiError {Object} 400 Some parameters may contain invalid values.
- * @apiError 404 Trade not found.
+ * @apiParam {String} method Xchange server method.
+ * @apiParam {Array} params Array of parameters for a method.
+ * @apiSuccess {Object} error Contains non-null if error.
+ * @apiSuccess {Object} result Response.
+ * @apiError 500 Some parameters may contain invalid values.
+ * @apiError 404 Method.
  * @apiError 401 user access only.
  */
 router.get('/',
