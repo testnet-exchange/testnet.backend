@@ -39,7 +39,7 @@ const config = {
   test: { },
   development: {
     mongo: {
-      uri: 'mongodb://localhost/testnet-xchange-backend-dev',
+      uri: 'mongodb://localhost:27017/testnet-xchange-backend-dev',
       options: {
         debug: true
       }
@@ -49,7 +49,7 @@ const config = {
     ip: process.env.IP || undefined,
     port: process.env.PORT || 8030,
     mongo: {
-      uri: process.env.MONGODB_URI || 'mongodb://localhost/testnet-xchange-backend'
+      uri: process.env.MONGODB_URI || 'mongodb://localhost:27017/testnet-xchange-backend'
     }
   }
 }
