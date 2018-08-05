@@ -1,3 +1,8 @@
+const check = {
+  Number: a => Number.isNaN(Number(a)) ? false : Number(a),
+  Optional: defaultValue => a => a || defaultValue
+}
+
 export default [
   // ADMIN ONLY
   {
@@ -27,8 +32,8 @@ export default [
     role: 'public',
     tokens: ['market', 'limit', 'interval'],
     handle: {
-      limit: a => Number.isNaN(Number(a)) ? false : Number(a),
-      interval: str => str || '0'
+      limit: check.Number,
+      interval: check.Optional('0')
     }
   }
 ]
