@@ -7,6 +7,7 @@
 	- [Authenticate with Facebook](#authenticate-with-facebook)
 	- [Authenticate with Github](#authenticate-with-github)
 	- [Authenticate with Google](#authenticate-with-google)
+	- [Authenticate with Reddit](#authenticate-with-reddit)
 	
 - [Trade](#trade)
 	- [Send root-level request to Xchange](#send-root-level-request-to-xchange)
@@ -82,6 +83,20 @@
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
 | access_token			| String			|  <p>Google user accessToken.</p>							|
+
+## Authenticate with Reddit
+
+
+
+	POST /auth/reddit
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| state			| String			|  <p>Reddit variable passed on login.</p>							|
+| code			| String			|  <p>Reddit user accessToken.</p>							|
 
 # Trade
 

@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { login } from './controller'
-import { password, facebook, github, google } from '../../services/passport'
+import { password, facebook, github, google, reddit } from '../../services/passport'
 
 const router = new Router()
 
@@ -16,7 +16,6 @@ const router = new Router()
  * @apiError 401 Master access only or invalid credentials.
  */
 router.post('/',
-  // master(),
   password(),
   login)
 
@@ -57,6 +56,20 @@ router.post('/github',
  */
 router.post('/google',
   google(),
+  login)
+
+/**
+ * @api {post} /auth/reddit Authenticate with Reddit
+ * @apiName AuthenticateReddit
+ * @apiGroup Auth
+ * @apiParam {String} state Reddit variable passed on login.
+ * @apiParam {String} code Reddit user accessToken.
+ * @apiSuccess (Success 201) {String} token User `access_token` to be passed to other requests.
+ * @apiSuccess (Success 201) {Object} user Current user's data.
+ * @apiError 401 Invalid credentials.
+ */
+router.post('/reddit',
+  reddit(),
   login)
 
 export default router

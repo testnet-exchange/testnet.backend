@@ -7,6 +7,7 @@ import { jwtSecret, masterKey } from '../../config'
 import * as facebookService from '../facebook'
 import * as githubService from '../github'
 import * as googleService from '../google'
+import * as redditService from '../reddit'
 import User, { schema } from '../../api/user/model'
 
 export const password = () => (req, res, next) =>
@@ -30,6 +31,9 @@ export const github = () =>
 
 export const google = () =>
   passport.authenticate('google', { session: false })
+
+export const reddit = () =>
+  passport.authenticate('reddit', { session: false })
 
 export const master = () =>
   passport.authenticate('master', { session: false })
@@ -84,6 +88,15 @@ passport.use('github', new BearerStrategy((token, done) => {
 
 passport.use('google', new BearerStrategy((token, done) => {
   googleService.getUser(token).then((user) => {
+    return User.createFromService(user)
+  }).then((user) => {
+    done(null, user)
+    return null
+  }).catch(done)
+}))
+
+passport.use('reddit', new BearerStrategy((token, done) => {
+  redditService.getUser(token).then((user) => {
     return User.createFromService(user)
   }).then((user) => {
     done(null, user)
