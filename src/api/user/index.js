@@ -69,6 +69,10 @@ router.post('/',
   body({ email, password, name, picture, role }),
   create)
 
+router.post('/sign-up',
+  body({ email, password, name, picture }),
+  create)
+
 /**
  * @api {put} /users/:id Update user
  * @apiName UpdateUser
