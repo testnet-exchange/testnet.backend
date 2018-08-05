@@ -19,7 +19,7 @@ script:
 after_success:
   skip_cleanup: true
   script:
-  - ssh sweatco@testnet.exchange "cd /home/caffeinum/testXback && git pull"
+  - ssh caffeinum@testnet.exchange "cd /home/caffeinum/testXback && git pull"
   on:
     branch: master
 env:
