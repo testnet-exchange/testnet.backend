@@ -16,6 +16,7 @@ script:
 - npm test -- -i --coverage
 deploy:
   skip_cleanup: true
+  provider: script
   script: ssh -i travis caffeinum@testnet.exchange "cd /home/caffeinum/testXback && git pull"
   on:
     branch: master
