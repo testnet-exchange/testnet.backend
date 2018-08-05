@@ -15,6 +15,10 @@ export const checkMethod = (action, payload, role, options) => {
   if (role === 'user') {
     const { uid } = options
 
+    if (!uid) {
+      throw new XError(401, `You need to provide uid in user-scope method`)
+    }
+
     if (payload.uid) {
       console.warn(`USER DATA contained uid=${payload.uid}, while his uid=${uid}`)
     }
@@ -28,16 +32,20 @@ export const checkMethod = (action, payload, role, options) => {
 
   const keys = Object.keys(payload)
 
-  if (keys.length !== method.tokens.length) {
-    throw new XError(401, `Wrong length: [${keys}] / [${method.tokens}]`)
-  }
+  return method.tokens.map((token, index) => {
+    if (token !== keys[index]) {
+      throw new XError(401, `Wrong keys: [${keys}] / [${method.tokens}]`)
+    }
 
-  const params = method.tokens
-    .filter((elem, index) => elem === keys[index])
+    const handle = method.handle[token]
+    const value = payload[token]
 
-  if (params.length !== method.tokens.length) {
-    throw new XError(401, `Wrong keys: [${keys}] / [${method.tokens}]`)
-  }
+    const newValue = handle ? handle(value) : value
 
-  return Object.values(payload)
+    if (newValue === false || newValue === undefined) {
+      throw new XError(401, `Wrong value at key [${token}] from value [${value}]`)
+    } else {
+      return newValue
+    }
+  })
 }

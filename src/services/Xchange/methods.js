@@ -21,5 +21,14 @@ export default [
     name: 'asset.list',
     role: 'public',
     tokens: []
+  },
+  {
+    name: 'order.depth',
+    role: 'public',
+    tokens: ['market', 'limit', 'interval'],
+    handle: {
+      limit: a => Number.isNaN(Number(a)) ? false : Number(a),
+      interval: str => str || '0'
+    }
   }
 ]
