@@ -1,6 +1,7 @@
 const check = {
   Number: a => Number.isNaN(Number(a)) ? false : Number(a),
-  Optional: defaultValue => a => a || defaultValue
+  Optional: defaultValue => a => a || defaultValue,
+  ENUM: list => a => list.includes(a) ? a : false
 }
 
 export default [
