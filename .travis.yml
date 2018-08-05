@@ -14,10 +14,9 @@ addons:
 script:
 - ssh -i travis caffeinum@testnet.exchange -L 8080:192.168.18.45:8080 -N -f
 - npm test -- -i --coverage
-after_success:
+deploy:
   skip_cleanup: true
-  script:
-    - ssh -i travis caffeinum@testnet.exchange "cd /home/caffeinum/testXback && git pull"
+  script: ssh -i travis caffeinum@testnet.exchange "cd /home/caffeinum/testXback && git pull"
   on:
     branch: master
 env:
