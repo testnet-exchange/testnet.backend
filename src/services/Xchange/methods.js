@@ -50,6 +50,20 @@ export default [
     }
   },
   {
+    name: 'market.last',
+    role: 'public',
+    tokens: ['market']
+  },
+  {
+    name: 'market.deals',
+    role: 'public',
+    tokens: ['market', 'limit', 'last_id'],
+    handle: {
+      limit: check.Number,
+      last_id: check.Number
+    }
+  },
+  {
     name: 'market.status_today',
     role: 'public',
     tokens: ['market']
