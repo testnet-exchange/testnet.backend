@@ -2,6 +2,8 @@ language: node_js
 node_js:
 - v8
 - v10
+services:
+  - mongodb
 addons:
   apt:
     sources:
@@ -10,7 +12,14 @@ addons:
     - gcc-4.8
     - g++-4.8
 script:
+  - npm run connect-xchange
   - npm test -- -i --coverage
+deploy:
+  skip_cleanup: true
+  script:
+    - ssh caffeinum@testnet.exchange "cd /home/caffeinum/testXback && git pull"
+  on:
+    branch: master
 env:
   global:
   - CXX=g++-4.8
