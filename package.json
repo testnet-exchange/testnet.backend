@@ -14,7 +14,8 @@
     "prod": "cross-env NODE_ENV=production nodemon -i \"*.test.js\" -r dotenv-safe/config .",
     "lint": "eslint src",
     "docs": "apidoc -i src -o docs && apidoc-markdown -p docs -o DOCS.md",
-    "postdocs": "opn docs/index.html"
+    "postdocs": "opn docs/index.html",
+    "deploy": "ssh caffeinum@testnet.exchange \"cd /home/caffeinum/testXback && git pull\""
   },
   "jest": {
     "testEnvironment": "node",
