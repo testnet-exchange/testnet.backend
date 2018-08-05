@@ -30,6 +30,10 @@ export const checkMethod = (action, payload, role, options) => {
     payload = { ...payload, business_id: options.opid }
   }
 
+  if (typeof method.predefined === 'object') {
+    payload = { ...payload, ...method.predefined }
+  }
+
   const keys = Object.keys(payload)
 
   return method.tokens.map((token, index) => {
