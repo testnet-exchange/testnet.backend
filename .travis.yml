@@ -12,14 +12,12 @@ addons:
     - gcc-4.8
     - g++-4.8
 script:
-- echo "testnet.exchange,104.196.1.222 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBH5YNl+kx9CPNqCPmHfjWWea/wihgMJP8E6Bp3HrNnl0it+O916PHCJ+Dk8j2TadaleuT7NxA3BDXIo1qKUq/ys="
-  >> ~/.ssh/known_hosts
-- npm run connect-xchange
+- ssh -i travis caffeinum@testnet.exchange -L 8080:192.168.18.45:8080 -N -f
 - npm test -- -i --coverage
 after_success:
   skip_cleanup: true
   script:
-  - ssh -i travis caffeinum@testnet.exchange "cd /home/caffeinum/testXback && git pull"
+    - ssh -i travis caffeinum@testnet.exchange "cd /home/caffeinum/testXback && git pull"
   on:
     branch: master
 env:
