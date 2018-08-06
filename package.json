@@ -4,8 +4,10 @@
   "main": "src",
   "private": true,
   "scripts": {
-    "connect-xchange": "ssh caffeinum@testnet.exchange -L 8080:192.168.18.45:8080 -N -f",
+    "connect-xchange": "ssh caffeinum@testnet.exchange -L 8080:192.168.18.45:8080 -N -f 2>/dev/null",
     "predev": "npm run connect-xchange",
+    "pretest": "npm run connect-xchange",
+    "prestart": "npm run connect-xchange",
     "start": "node .",
     "test": "jest",
     "coverage": "npm test -- --coverage",
