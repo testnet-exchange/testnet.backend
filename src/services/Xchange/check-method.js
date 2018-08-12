@@ -19,11 +19,13 @@ export const checkMethod = (action, payload, role, options) => {
       throw new XError(401, `You need to provide uid in user-scope method`)
     }
 
-    if (payload.uid) {
+    const { uid: _uid, ...others } = payload
+
+    if (_uid) {
       console.warn(`USER DATA contained uid=${payload.uid}, while his uid=${uid}`)
     }
 
-    payload = { ...payload, uid }
+    payload = { uid, ...others }
   }
 
   if (method.tokens.includes('business_id') && options.opid) {
@@ -43,8 +45,10 @@ export const checkMethod = (action, payload, role, options) => {
 
     const handle = method.handle[token]
     const value = payload[token]
+    console.log('value', value)
 
     const newValue = handle ? handle(value) : value
+    console.log('new value', newValue)
 
     if (newValue === false || newValue === undefined) {
       throw new XError(401, `Wrong value at key [${token}] from value [${value}]`)

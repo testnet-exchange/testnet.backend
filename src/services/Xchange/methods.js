@@ -42,11 +42,12 @@ export default [
     tokens: ['uid', 'market', 'side', 'amount', 'price', 'taker_fee_rate', 'maker_fee_rate', 'source'],
     handle: {
       uid: check.Number,
-      side: check.ENUM([1, 2])
+      side: check.Number,
+      // ENUM([1, 2])
     },
     predefined: {
-      taker_fee_rate: 0.0002,
-      maker_fee_rate: 0.0001
+      taker_fee_rate: '0.0002',
+      maker_fee_rate: '0.0001'
     }
   },
   {
