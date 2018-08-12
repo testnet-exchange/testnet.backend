@@ -24,7 +24,8 @@ test('GET /get-address 200 (user)', async () => {
   const { error, result } = body
   expect(error).toBeFalsy()
   expect(typeof result).toEqual('object')
-  expect(typeof result.address).toEqual('string')
+  expect(typeof result.ETC).toEqual('string')
+  expect(typeof result.BTC).toEqual('string')
 })
 
 test('GET /get-address 401 - no access to get-address', async () => {
@@ -46,7 +47,8 @@ test('GET /check-balance 200 (user)', async () => {
   const { error, result } = body
   expect(error).toBeFalsy()
   expect(typeof result).toEqual('object')
-  expect(typeof result.balance).toEqual('number')
+  expect(typeof result.ETC).toEqual('number')
+  expect(typeof result.BTC).toEqual('number')
 })
 
 test('GET /check-balance 401 - no access to check-balance', async () => {
