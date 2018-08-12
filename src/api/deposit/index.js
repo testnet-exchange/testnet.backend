@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { token } from '../../services/passport'
-import { getAddress, checkBalance } from './controller'
+import { getAddress, updateBalance } from './controller'
 
 const router = new Router()
 
@@ -30,8 +30,8 @@ router.get('/get-address',
  * @apiError 404 Deposit not found.
  * @apiError 401 user access only.
  */
-router.get('/check-balance',
+router.get('/update-balance',
   token({ required: true }),
-  checkBalance)
+  updateBalance)
 
 export default router

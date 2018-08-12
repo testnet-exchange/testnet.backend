@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { token } from '../../services/passport'
-import { sendRequest, sendRequestUser, sendRequestPublic } from './controller'
+import { sendRequest } from './controller'
 
 const router = new Router()
 

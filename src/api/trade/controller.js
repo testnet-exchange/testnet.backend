@@ -19,6 +19,7 @@ const fetchAuthUID = (user, role) => {
 }
 
 export const sendRequest = (role) => async (req, res, next) => {
+  // eslint-disable-next-line camelcase
   const { user, params: { method }, query: { access_token, ...payload } } = req
 
   try {
