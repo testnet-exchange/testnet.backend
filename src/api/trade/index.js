@@ -21,7 +21,7 @@ const router = new Router()
  */
 router.get('/admin/:method',
   token({ required: true, roles: ['admin'] }),
-  sendRequest)
+  sendRequest('admin'))
 
 /**
  * @api {get} /trade/user/:method Send authenticated request to Xchange
@@ -40,7 +40,7 @@ router.get('/admin/:method',
  */
 router.get('/user/:method',
   token({ required: true }),
-  sendRequestUser)
+  sendRequest('user'))
 
 /**
  * @api {get} /trade/public/:method Send general-scope request to Xchange
@@ -58,6 +58,6 @@ router.get('/user/:method',
  */
 router.get('/public/:method',
   token({ required: false }),
-  sendRequestPublic)
+  sendRequest('public'))
 
 export default router
