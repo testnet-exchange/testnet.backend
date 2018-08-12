@@ -5,7 +5,7 @@ import { getAddress, updateBalance } from './controller'
 const router = new Router()
 
 /**
- * @api {get} /deposit/:id Retrieve deposit
+ * @api {get} /deposit/get-address Retrieve deposit
  * @apiName RetrieveDeposit
  * @apiGroup Deposit
  * @apiPermission user
@@ -20,7 +20,7 @@ router.get('/get-address',
   getAddress)
 
 /**
- * @api {get} /deposit/:id Retrieve deposit
+ * @api {get} /deposit/update-balance Retrieve deposit
  * @apiName RetrieveDeposit
  * @apiGroup Deposit
  * @apiPermission user
