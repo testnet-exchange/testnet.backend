@@ -26,7 +26,7 @@ let mongoServer
 beforeAll(async () => {
   mongoServer = new MongodbMemoryServer()
   const mongoUri = await mongoServer.getConnectionString()
-  await mongoose.connect(mongoUri, (err) => {
+  await mongoose.connect(mongoUri, { useNewUrlParser: true }, (err) => {
     if (err) console.error(err)
   })
 })
