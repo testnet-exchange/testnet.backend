@@ -17,7 +17,7 @@ script:
 deploy:
   skip_cleanup: true
   provider: script
-  script: ssh -i travis caffeinum@testnet.exchange "cd /home/caffeinum/testXback && git pull"
+  script: ssh -i travis caffeinum@testnet.exchange "cd /home/caffeinum/testXback && git pull && git reset --hard"
   on:
     branch: master
 env:
