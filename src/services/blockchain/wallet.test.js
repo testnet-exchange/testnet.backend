@@ -20,7 +20,7 @@ describe('deposit', () => {
   })
 })
 
-describe('top up', () => {
+describe('top up BTC', () => {
   it('updates balance', async () => {
     const res = await updateBalance('BTC', 12)
     console.log(res)
@@ -53,10 +53,42 @@ describe('top up', () => {
   })
 })
 
+describe('top up ETH', () => {
+  it('updates balance', async () => {
+    const res = await updateBalance('ETH', 12)
+    console.log(res)
+    expect(res.length).toBe(0)
+  })
+
+  it('can compare txs', async () => {
+    const txids = ['0xaaa', '0xbbb']
+    const txs = await filterUnsaved('ETH', 12, txids, (hash) => ({ hash }))
+
+    expect(txs.length).toBe(2)
+  })
+
+  it('filters away already saved', async () => {
+    const txids = [
+      '0xaaa', '0xbbb',
+      '0x9a47599a32936d3e4f22e7772290f91d9157103179406e6f2935df8c9a9a66a8'
+    ]
+
+    const txs = await filterUnsaved('ETH', 12, txids, (hash) => ({ hash }))
+
+    expect(txs.length).toBe(2)
+  })
+
+  it('can fetch previous topups', async () => {
+    const result = await getBalanceHistory('ETH', 12)
+
+    expect(typeof result).toBe('object')
+    expect(Array.isArray(result.records)).toBe(true)
+  })
+})
+
 describe('unique id', () => {
   it('generates int from hash', async () => {
     const id = hashToId('aaa', 'BTC')
-    console.log(id)
 
     expect(Number.isInteger(id)).toBe(true)
   })

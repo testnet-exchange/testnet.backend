@@ -1,16 +1,15 @@
-import bitcoin from 'bitcoinjs-lib'
+import bitcoinjs from 'bitcoinjs-lib'
 import bip32 from 'bip32'
 import hdkey from 'hdkey'
 import BigNumber from 'bignumber.js'
 
-import { fetchTransactionIDs, fetchUTXOs } from './bitcoin'
+import bitcoin from './bitcoin'
+import ethereum, { web3 } from './ethereum'
+
 import { runMethod } from '../Xchange'
 
-import Web3 from 'web3'
-const web3 = new Web3(new Web3.providers.HttpProvider(`https://rinkeby.infura.io/JCnK5ifEPH9qcQkX0Ahl`))
-
 const _seed = process.env.WALLET_SEED
-const network = bitcoin.networks.testnet
+const network = bitcoinjs.networks.testnet
 
 let btc, eth
 
@@ -37,7 +36,7 @@ export const getAddress = (xid = 0) => {
   const _ethkey = eth.derive(ethPath)
 
   const _eth = web3.eth.accounts.privateKeyToAccount(_ethkey._privateKey)
-  const _btc = bitcoin.payments.p2pkh({ pubkey: _btckey.publicKey, network })
+  const _btc = bitcoinjs.payments.p2pkh({ pubkey: _btckey.publicKey, network })
 
   return {
     eth: _eth.address,
@@ -85,10 +84,10 @@ export const updateBtcBalance = async (xid) => {
 
   console.log('address', address)
 
-  const txids = await fetchTransactionIDs(address.btc)
+  const txids = await bitcoin.fetchTransactionIDs(address.btc)
   console.log('txids', txids)
 
-  const utxos = await fetchUTXOs(address.btc)
+  const utxos = await bitcoin.fetchUTXOs(address.btc)
   console.log('utxo', utxos)
 
   const onlyConfirmed = utxos.filter(utxo => utxo.confirmations > 0)
@@ -113,11 +112,13 @@ export const updateEthBalance = async (xid) => {
   console.log(`run update balance`)
   const address = getAddress(xid)
 
-  const txids = [] // await web3.eth.getTransactionList(address.eth)
+  console.log('address', address)
+
+  const txids = await ethereum.fetchTransactionIDs(address.eth)
 
   console.log('eth txids', txids)
 
-  const unsaved = await filterUnsaved('ETH', xid, txids, (hash) => web3.eth.getTransaction(hash))
+  const unsaved = await filterUnsaved('ETH', xid, txids, ethereum.fetchTransaction)
 
   console.log('unsaved', unsaved)
 

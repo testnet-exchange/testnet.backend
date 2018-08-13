@@ -28,3 +28,9 @@ export const fetchUTXOs = (address) => {
   return request(`${API_ROOT}/addr/${address}/utxo`)
     .then(json => json.body)
 }
+
+export default {
+  fetchTransaction,
+  fetchTransactionIDs,
+  fetchUTXOs,
+}
