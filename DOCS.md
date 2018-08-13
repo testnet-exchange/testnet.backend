@@ -9,6 +9,9 @@
 	- [Authenticate with Google](#authenticate-with-google)
 	- [Authenticate with Reddit](#authenticate-with-reddit)
 	
+- [Deposit](#deposit)
+	- [Retrieve deposit](#retrieve-deposit)
+	
 - [Trade](#trade)
 	- [Send root-level request to Xchange](#send-root-level-request-to-xchange)
 	- [Send general-scope request to Xchange](#send-general-scope-request-to-xchange)
@@ -97,6 +100,21 @@
 |---------|-----------|--------------------------------------|
 | state			| String			|  <p>Reddit variable passed on login.</p>							|
 | code			| String			|  <p>Reddit user accessToken.</p>							|
+
+# Deposit
+
+## Retrieve deposit
+
+
+
+	GET /deposit/get-address
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| access_token			| String			|  <p>user access token.</p>							|
 
 # Trade
 

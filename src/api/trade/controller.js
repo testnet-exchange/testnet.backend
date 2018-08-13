@@ -1,73 +1,32 @@
-import request from 'superagent'
-import { checkMethod } from '../../services/Xchange'
+import { runMethod, XError } from '../../services/Xchange'
 
-const EXCHANGE_API = `http://localhost:8080`
-
-const BASE_PARAMS = {
-  'jsonrpc': '2.0',
-  'id': 0
-}
-
-export const send = (method, params) => {
-  const payload = {
-    method,
-    params: params || [],
-    ...BASE_PARAMS
+const fetchAuthUID = (user, role) => {
+  if (role !== 'user') {
+    return {}
   }
 
-  console.log('payload', payload)
-
-  return request
-    .post(EXCHANGE_API)
-    .send(payload)
-    .then(json => JSON.parse(json.text))
-}
-
-export const sendRequest = async (req, res, next) => {
-  const { params: { method }, query: { access_token, ...payload } } = req
-
-  console.log('payload', payload)
-
-  try {
-    const params = checkMethod(method, payload, 'admin')
-
-    const reply = await send(method, params)
-
-    res.json(reply)
-  } catch ({ status, code, name, message }) {
-    const reply = { error: true, result: { code, name, message } }
-
-    res.status(status || 500).json(reply)
+  if (!user) {
+    throw new XError(403, `Not logged in`)
   }
-}
-
-export const sendRequestPublic = async ({ params: { method }, query: { ...payload } }, res, next) => {
-  try {
-    const params = checkMethod(method, payload, 'public')
-
-    const reply = await send(method, params)
-
-    res.json(reply)
-  } catch ({ status, code, name, message }) {
-    const reply = { error: true, result: { code, name, message } }
-
-    res.status(status || 500).json(reply)
-  }
-}
-
-export const sendRequestUser = async (req, res, next) => {
-  const { user, params: { method }, query: { access_token, ...payload } } = req
 
   const uid = user.xid
 
-  if (!uid) return res.status(404).json({ error: true })
+  if (!uid) {
+    throw new XError(404, `No xid at user ${user.id}`)
+  }
 
-  console.log('params', payload)
+  return uid
+}
+
+export const sendRequest = (role) => async (req, res, next) => {
+  // eslint-disable-next-line camelcase
+  const { user, params: { method }, query: { access_token, ...payload } } = req
 
   try {
-    const params = checkMethod(method, payload, 'user', { uid })
+    const uid = fetchAuthUID(user, role)
+    const opts = uid ? { uid } : {}
 
-    const reply = await send(method, params)
+    const reply = await runMethod(method, payload, role, opts)
 
     res.json(reply)
   } catch ({ status, code, name, message }) {

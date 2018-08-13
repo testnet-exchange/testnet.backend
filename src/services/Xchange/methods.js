@@ -12,7 +12,8 @@ export default [
     tokens: ['uid', 'asset', 'business_type', 'business_id', 'change_str', 'detail'],
     handle: {
       uid: check.Number,
-      business_id: check.Number
+      business_id: check.Number,
+      change_str: String,
     }
   },
   // user scope
