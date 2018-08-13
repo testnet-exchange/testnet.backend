@@ -49,7 +49,7 @@ test('GET /check-balance 200 (user)', async () => {
 })
 
 test('GET /check-balance 401 - no access to check-balance', async () => {
-  const { status, body } = await request(app())
+  const { status } = await request(app())
     .get(`${apiRoot}/update-balance`)
     .query()
 
