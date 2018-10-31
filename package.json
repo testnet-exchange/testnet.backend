@@ -4,10 +4,7 @@
   "main": "src",
   "private": true,
   "scripts": {
-    "connect-xchange": "ssh caffeinum@testnet.exchange -L 8080:192.168.18.45:8080 -N -f 2>/dev/null",
-    "predev": "npm run connect-xchange",
-    "pretest": "npm run connect-xchange",
-    "prestart": "npm run connect-xchange",
+    "init": "cp .env.example .env",
     "start": "node .",
     "test": "jest",
     "coverage": "npm test -- --coverage",
@@ -16,8 +13,7 @@
     "prod": "cross-env NODE_ENV=production nodemon -i \"*.test.js\" -r dotenv-safe/config .",
     "lint": "eslint src",
     "docs": "apidoc -i src -o docs && apidoc-markdown -p docs -o DOCS.md",
-    "postdocs": "opn docs/index.html",
-    "deploy": "ssh caffeinum@testnet.exchange \"cd /home/caffeinum/testXback && git pull\""
+    "postdocs": "opn docs/index.html"
   },
   "jest": {
     "testEnvironment": "node",

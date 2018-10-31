@@ -19,6 +19,13 @@ npm run prod # run the API in production mode
 npm run docs # generate API docs
 ```
 
+## Docker
+
+```bash
+docker build .
+docker run [image-id]
+```
+
 ## Playing locally
 
 First, you will need to install and run [MongoDB](https://www.mongodb.com/) in another terminal instance.
