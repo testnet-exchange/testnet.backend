@@ -1,6 +1,6 @@
 # Backend for [testnet.exchange](https://testnet.exchange)
 
-[<img src="https://raw.githubusercontent.com/morejust/foundation/master/madebymorejust.png" width="80">](https://morejust.foundation/?from=pravda.contracts) <img src="https://api.travis-ci.org/testnet-exchange/testXback.svg?branch=master">
+[<img src="https://raw.githubusercontent.com/morejust/foundation/master/madebymorejust.png" width="80">](https://morejust.foundation/?from=testnet.backend) <img src="https://api.travis-ci.org/testnet-exchange/testXback.svg?branch=master">
 
 The backend for [ViaBTC](https://github.com/testnet-exchange)-powered opensource cryptocurrency exchange.
 
@@ -190,4 +190,4 @@ This is the entry file of the API. It defines the routes using, along other midd
 Here you can put `helpers`, `libraries` and other types of modules which you want to use in your APIs.
 
 
-[<img src="https://raw.githubusercontent.com/morejust/foundation/master/madebymorejust.png" width="80">](https://morejust.foundation/?from=pravda.contracts)
+[<img src="https://raw.githubusercontent.com/morejust/foundation/master/madebymorejust.png" width="80">](https://morejust.foundation/?from=testnet.backend)
